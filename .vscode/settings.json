@@ -1,9 +1,10 @@
 {
-    "files.associations": {
-        "qmainwindow": "cpp",
-        "qscopedpointer": "cpp",
-        "qpainter": "cpp",
-        "*.tcc": "cpp",
-        "type_traits": "cpp"
-    }
+  "files.associations": {
+    "qmainwindow": "cpp",
+    "qscopedpointer": "cpp",
+    "qpainter": "cpp",
+    "*.tcc": "cpp",
+    "type_traits": "cpp"
+  },
+  "plantuml.exportOutDir": "dosc/diagrams/out"
 }

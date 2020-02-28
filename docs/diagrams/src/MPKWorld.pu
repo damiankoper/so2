@@ -1,0 +1,57 @@
+@startuml MPK_World
+skinparam Linetype ortho
+class MPKWorld{
+    stops: Stop[]
+    relations: Relation[]
+}
+
+class Stop {
+    name: string
+    position: Vector2i
+    passengers: Passenger[]
+}
+
+class Passenger {
+    source: const Stop
+    target: const Stop 
+}
+
+class Relation {
+    stops: Stop[]
+    vehicles: Vehicle[]
+}
+
+class Vehicle{
+    speed: float
+    position: float
+    relation: Relation
+    passengers: Passenger[]
+}
+
+MPKWorld *--> "2..*" Stop
+MPKWorld *--> "1..*" Relation
+Relation o--> "2..*" Stop
+
+Relation *--> "1..*" Vehicle
+
+Stop o--> "0..*" Passenger
+Vehicle o--> "0..*" Passenger
+
+note left of Stop
+    Przystanek jest blokującym
+    zasobem przechowującym 
+    oczekujących pasażerów.
+end note
+
+note bottom of Vehicle
+    Pojazd jest wątkiem pobierającym
+    pasażerów do "przetworzenia"
+    w czasie na wyłączność.
+end note
+
+note left of Passenger
+    Pasażer jest obiektem, który może
+    znajdować się w jednej chwili
+    tylko w jednym miejscu.
+end note
+@enduml
