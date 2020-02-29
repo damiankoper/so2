@@ -1,4 +1,6 @@
 #include "RenderArea.hpp"
+#include "Drawers/StopDrawer.hpp"
+#include "Drawers/RelationDrawer.hpp"
 #include <QPainter>
 #include <QPen>
 #include <string>
@@ -20,24 +22,23 @@ void RenderArea::setMPKWorld(MPKWorld *world)
 
 void RenderArea::paintEvent(QPaintEvent * /* event */)
 {
+    StopDrawer stopDrawer;
+    RelationDrawer relationDrawer;
+
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
+    int c = 0;
+    for (auto relation : world->relations)
+    {
+        relationDrawer.setRelation(relation);
+        relationDrawer.setNth(c++);
+        relationDrawer.draw(painter);
+    }
+
     for (auto stop : world->stops)
     {
-        QPen pen(Qt::black, STOP_STROKE, Qt::SolidLine, Qt::RoundCap, Qt::MiterJoin);
-        painter.setPen(pen);
-
-        std::string text = std::to_string(stop->passengers.size()) + "  " + stop->name;
-
-        int centerDelta = STOP_SIZE / 2;
-        QRect rect = QRect(
-            stop->position.x - centerDelta,
-            stop->position.y - centerDelta,
-            STOP_SIZE,
-            STOP_SIZE);
-        painter.drawRect(rect);
-        painter.drawText(stop->position.x - centerDelta - STOP_STROKE / 2,
-                         stop->position.y - (centerDelta + STOP_STROKE), tr(text.c_str()));
+        stopDrawer.setStop(stop);
+        stopDrawer.draw(painter);
     }
 }
