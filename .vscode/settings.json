@@ -6,5 +6,6 @@
     "*.tcc": "cpp",
     "type_traits": "cpp"
   },
-  "plantuml.exportOutDir": "dosc/diagrams/out"
+  "plantuml.exportOutDir": "docs/diagrams/out",
+  "cmake.configureOnOpen": true
 }
