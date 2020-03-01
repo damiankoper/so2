@@ -16,6 +16,13 @@ set(SOURCE_FILES
     src/mainwindow.cpp
     src/Geometry/Vector2i.cpp
     src/MPK/Stop.cpp
+    src/MPK/Passenger.cpp
+    src/MPK/Relation.cpp
+    src/MPK/Vehicle.cpp
+    src/MPK/MPKWorld.cpp
+    src/RenderArea.cpp
+    src/Drawers/StopDrawer.cpp
+    src/Drawers/RelationDrawer.cpp
 )
 
 add_project_meta(META_FILES_TO_INCLUDE)

@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 #include <QScopedPointer>
-
+#include "RenderArea.hpp"
 namespace Ui
 {
 class MainWindow;
@@ -16,8 +16,7 @@ public:
     MainWindow(QWidget *parent = 0);
     virtual ~MainWindow();
 
-    void paintEvent(QPaintEvent *event);
-
 private:
     QScopedPointer<Ui::MainWindow> ui;
+    QScopedPointer<RenderArea> renderArea;
 };
