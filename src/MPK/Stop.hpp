@@ -17,4 +17,5 @@ public:
     std::string name;
     Vector2i position;
     std::vector<Passenger *> passengers = std::vector<Passenger *>();
+    int relationsCount = 0;
 };

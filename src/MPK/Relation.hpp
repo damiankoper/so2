@@ -14,4 +14,12 @@ public:
     std::vector<Passenger *> passengers = std::vector<Passenger *>();
 
     std::vector<Vector2i> getPoints();
+    Vector2i addPointsForPositions(std::vector<Vector2i> &points,
+                                   Vector2i from,
+                                   Vector2i to,
+                                   Vector2i toOutputDirection);
+
+    //Vector2i getNthShift(int nth);
+
+    void addStop(Stop *stop, bool count = true);
 };
