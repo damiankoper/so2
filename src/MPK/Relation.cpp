@@ -13,7 +13,7 @@ void Relation::addStop(Stop *stop, bool count)
 {
 } */
 
-std::vector<Vector2i> Relation::getPoints()
+std::vector<Vector2i> Relation::getPoints(int nth)
 {
     std::vector<Vector2i> points = std::vector<Vector2i>();
 
@@ -23,15 +23,17 @@ std::vector<Vector2i> Relation::getPoints()
     {
         Stop *current = stops[i];
         Stop *next = stops[i + 1];
-        prevOutputDir = addPointsForPositions(points, current->position, next->position, prevOutputDir);
-
-        if (firstOutputDir.length() == 0)
-        {
-            firstOutputDir = prevOutputDir;
-        }
+        int currentStopNth = std::min(nth, current->relationsCount - 1);
+        int nextStopNth = std::min(nth, next->relationsCount - 1);
+        prevOutputDir = addPointsForPositions(
+            points,
+            current->position.add(Vector2i(0, currentStopNth * 15)),
+            next->position.add(Vector2i(0, nextStopNth * 15)),
+            prevOutputDir);
     }
 
-    points.push_back(Vector2i(stops[stops.size() - 1]->position.x, stops[stops.size() - 1]->position.y));
+    int stopNth = std::min(nth, stops[stops.size() - 1]->relationsCount);
+    points.push_back(stops[stops.size() - 1]->position.add(Vector2i(0, stopNth * 15)));
     return points;
 }
 
@@ -57,7 +59,7 @@ Vector2i Relation::addPointsForPositions(
     // Horizontal
     if (deltaY == 0 && sX == prevOutputDirection.x)
     {
-        return Vector2i(sX, 0);
+        return prevOutputDirection;
     }
     // Horizontal same Y U-turn
     else if (deltaY == 0 && sX != prevOutputDirection.x)
@@ -66,27 +68,27 @@ Vector2i Relation::addPointsForPositions(
             points,
             Vector2i(from.x, from.y),
             Vector2i(from.x, from.y - 3 * minShift),
-            Vector2i(-sX, 0));
+            prevOutputDirection);
 
         return addPointsForPositions(
             points,
-            Vector2i(to.x, to.y - 3 * minShift),
+            Vector2i(from.x, from.y - 3 * minShift),
             Vector2i(to.x, to.y),
-            Vector2i(sX, 0));
+            -prevOutputDirection);
     }
     // Horizontal curve
-    else if (abs(deltaX) >= abs(deltaY) + (2 * minShift) && sX == prevOutputDirection.x)
+    else if (abs(deltaX) > abs(deltaY) + 2 * minShift && sX == prevOutputDirection.x)
     {
         // current out
         points.push_back(Vector2i(from.x + (minShift * prevOutputDirection.x), from.y));
 
         //next in
-        points.push_back(Vector2i(from.x + ((minShift + (deltaY * sY)) * prevOutputDirection.x), to.y));
+        points.push_back(Vector2i(from.x + (minShift + abs(deltaY)) * prevOutputDirection.x, to.y));
 
-        return Vector2i(sX, 0);
+        return prevOutputDirection;
     }
     // Horizontal to horizontal vertical - U-turn
-    else
+    else if (abs(deltaX) <= abs(deltaY) + 2 * minShift || (deltaX * prevOutputDirection.x < 0))
     {
         if (deltaX * prevOutputDirection.x > 0)
         {
@@ -114,9 +116,9 @@ Vector2i Relation::addPointsForPositions(
             //next in
             points.push_back(Vector2i(to.x + (minShift * prevOutputDirection.x), to.y));
 
-            return Vector2i(-prevOutputDirection.x, 0);
+            return -prevOutputDirection;
         }
     }
 
-    return Vector2i(0, 0);
+    return prevOutputDirection;
 }

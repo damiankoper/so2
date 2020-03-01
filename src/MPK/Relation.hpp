@@ -13,7 +13,7 @@ public:
     std::vector<Stop *> stops = std::vector<Stop *>();
     std::vector<Passenger *> passengers = std::vector<Passenger *>();
 
-    std::vector<Vector2i> getPoints();
+    std::vector<Vector2i> getPoints(int nth = 0);
     Vector2i addPointsForPositions(std::vector<Vector2i> &points,
                                    Vector2i from,
                                    Vector2i to,
