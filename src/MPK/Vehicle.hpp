@@ -16,7 +16,6 @@ public:
 
     void incrementDistance();
 
-private:
     int speed;
     int capacity;
     float distance = 0;

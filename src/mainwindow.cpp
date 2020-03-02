@@ -61,8 +61,15 @@ MainWindow::MainWindow(QWidget *parent)
      * Dynamic from here 
      */
     Vehicle *v1 = new Vehicle();
-    v1->position = 100;
+    Vehicle *v2 = new Vehicle();
+    Vehicle *v3 = new Vehicle();
+    Vehicle *v4 = new Vehicle();
+    Vehicle *v5 = new Vehicle();
     relation->vehicles.push_back(v1);
+    relation2->vehicles.push_back(v2);
+    relation3->vehicles.push_back(v3);
+    relation4->vehicles.push_back(v4);
+    relation5->vehicles.push_back(v5);
 
     renderArea->setMPKWorld(world);
     ui->setupUi(this);

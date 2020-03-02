@@ -32,6 +32,6 @@ void Thread::join() {
 
 void *Thread::exec(void *thr) {
     // Function that is to be executed by the thread
-    reinterpret_cast<Thread *> (thr)->run();
+    (reinterpret_cast<Thread *> (thr))->run();
 }
 

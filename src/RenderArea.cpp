@@ -19,8 +19,13 @@ RenderArea::RenderArea(QWidget *parent) : QWidget(parent)
     QTimer *timer = new QTimer(this);
     QWidget *self = this;
     connect(timer, &QTimer::timeout, this, [self]() {
-        auto v1 = ((RenderArea *)self)->world->relations[0]->vehicles[0];
-        v1->position += v1->speed;
+        for (auto &&relation : ((RenderArea *)self)->world->relations)
+        {
+            for (auto &&vehicle : relation->vehicles)
+            {
+                vehicle->distance += vehicle->speed;
+            }
+        }
         self->repaint();
     });
     timer->start(1000 / 60);

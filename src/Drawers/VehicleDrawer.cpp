@@ -14,14 +14,14 @@ void VehicleDrawer::draw(QPainter &painter)
 {
     // W sumie useless jest Vector2i jak jest QPoint
     std::vector<QPoint> points = std::vector<QPoint>();
-
+/* 
     QPen pen2(Qt::darkYellow, 5, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
-    painter.setPen(pen2);
+    painter.setPen(pen2); */
 
-    for (auto &&point : relation->getSubPoints(vehicle->position, std::max(40, (int)vehicle->passengers.size() * VEHICLE_CAPACITY_SIZE)))
+    for (auto &&point : relation->getSubPoints(vehicle->distance, std::max(40, (int)vehicle->passengers.size() * VEHICLE_CAPACITY_SIZE)))
     {
         points.push_back(QPoint(point.x, point.y));
-        painter.drawEllipse(QPoint(point.x, point.y), 20, 20);
+        //painter.drawEllipse(QPoint(point.x, point.y), 20, 20);
     }
 
     QPen pen(QColor(relation->color.c_str()).lighter(125), VEHICLE_STROKE, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
