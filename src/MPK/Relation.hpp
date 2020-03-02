@@ -1,16 +1,20 @@
 #pragma once
+
 #include "../Geometry/Vector2i.hpp"
 #include "Passenger.hpp"
 #include "Stop.hpp"
 #include "Vehicle.hpp"
+#include <utility>
 #include <vector>
 #include <string>
+
 class Stop;
+
 class Vehicle;
-class Relation
-{
+
+class Relation {
 public:
-    Relation(std::string name, std::string color = "red") : name(name), color(color){};
+    explicit Relation(std::string name, std::string color = "red");
 
     std::string name;
     std::string color;
@@ -18,11 +22,15 @@ public:
     std::vector<Vehicle *> vehicles = std::vector<Vehicle *>();
 
     std::vector<Vector2i> getPoints();
+
     std::vector<Vector2i> getSubPoints(int start, int length);
+
     Vector2i addPointsForPositions(std::vector<Vector2i> &points,
-                                   Vector2i from,
-                                   Vector2i to,
+                                   const Vector2i &from,
+                                   const Vector2i &to,
                                    Vector2i toOutputDirection);
 
     void addStop(Stop *stop, bool count = true);
+
+    float getStopDistance(Stop *targetStop);
 };
