@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     /**
      * Dynamic from here 
      */
-    Vehicle * v1 = new Vehicle();
+    Vehicle *v1 = new Vehicle();
     v1->position = 100;
     relation->vehicles.push_back(v1);
 

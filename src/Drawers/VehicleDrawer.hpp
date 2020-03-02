@@ -13,6 +13,6 @@ public:
 private:
     Vehicle *vehicle = nullptr;
     Relation *relation = nullptr;
-    int VEHICLE_STROKE = 8;
+    int VEHICLE_STROKE = 16;
     int VEHICLE_CAPACITY_SIZE = 2;
 };

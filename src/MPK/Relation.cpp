@@ -118,35 +118,56 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length) {
     std::vector<Vector2i> points = getPoints();
     std::vector<Vector2i> subPoints = std::vector<Vector2i>();
 
-    float travelledLength = 0;
+    float travelledDistance = 0;
     size_t startIndex = 0;
+    Vector2i startPoint = points[startIndex];
 
-    while (travelledLength < float(start)) {
-        Vector2i prev = points[startIndex];
+    do
+    {
         Vector2i next = points[startIndex + 1];
-        float distance = prev.sub(next).length();
-        travelledLength += distance;
-        startIndex++;
-    }
+        float distance = startPoint.sub(next).length();
+        if (travelledDistance + distance <= start)
+        {
+            travelledDistance += distance;
+            startPoint = next;
+            startIndex++;
+        }
+        else
+        {
+            int distanceLeft = start - travelledDistance;
+            travelledDistance += distanceLeft;
+            startPoint = Vector2i(startPoint.x + 1 / distanceLeft * (next.x - startPoint.x),
+                                  startPoint.y + 1 / distanceLeft * (next.y - startPoint.y));
+            subPoints.push_back(startPoint);
+            break;
+        }
+    } while (true);
 
-    size_t endIndex = startIndex + 1;
+    int end = start + length;
 
-    while (travelledLength < float(start + length)) {
-        Vector2i prev = points[startIndex];
+    do
+    {
         Vector2i next = points[startIndex + 1];
-        float distance = prev.sub(next).length();
-        travelledLength += distance;
-    }
-}
+        float distance = startPoint.sub(next).length();
+        if (travelledDistance + distance <= end)
+        {
+            travelledDistance += distance;
+            startPoint = next;
+            startIndex++;
+            subPoints.push_back(startPoint);
+        }
+        else
+        {
+            /*int distanceLeft = end - travelledDistance;
+            startPoint = Vector2i(
+                (startPoint.x * distanceLeft + next.x * (travelledDistance + distance - end)) / (travelledDistance + distance - end + distanceLeft),
+                (startPoint.y * distanceLeft + next.y * (travelledDistance + distance - end)) / (travelledDistance + distance - end + distanceLeft));
+             */
+            subPoints.push_back(startPoint);
+            break;
+        }
+    } while (true);
 
-float Relation::getStopDistance(Stop *targetStop) {
-    float totalDistance = 0;
-
-    auto points = this->getPoints();
-    for (int i = 0; i < points.size() - 1; i++) {
-        totalDistance += points[i + 1].length() - points[i].length();
-        if (points[i] == targetStop->position) break;
-    }
-
-    return totalDistance;
+    //subPoints.push_back(points[points.size() - 1]);
+    return subPoints;
 }

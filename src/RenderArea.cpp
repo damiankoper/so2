@@ -4,6 +4,7 @@
 #include "Drawers/VehicleDrawer.hpp"
 #include <QPainter>
 #include <QPen>
+#include <QTimer>
 #include <string>
 RenderArea::RenderArea(QWidget *parent) : QWidget(parent)
 {
@@ -14,6 +15,15 @@ RenderArea::RenderArea(QWidget *parent) : QWidget(parent)
     pal.setColor(QPalette::Background, Qt::white);
     this->setAutoFillBackground(true);
     this->setPalette(pal);
+
+    QTimer *timer = new QTimer(this);
+    QWidget *self = this;
+    connect(timer, &QTimer::timeout, this, [self]() {
+        auto v1 = ((RenderArea *)self)->world->relations[0]->vehicles[0];
+        v1->position += v1->speed;
+        self->repaint();
+    });
+    timer->start(1000 / 60);
 }
 
 void RenderArea::setMPKWorld(MPKWorld *world)
@@ -34,13 +44,13 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
     for (auto relation : world->relations)
     {
         relationDrawer.setRelation(relation);
-        relationDrawer.setNth(c++);
         relationDrawer.draw(painter);
     }
 
     for (auto relation : world->relations)
     {
-        for(auto vehicle : relation->vehicles){
+        for (auto vehicle : relation->vehicles)
+        {
             vehicleDrawer.setRelation(relation);
             vehicleDrawer.setVehicle(vehicle);
             vehicleDrawer.draw(painter);
