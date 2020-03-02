@@ -19,6 +19,7 @@ private:
 
 protected:
     bool started = false;
+    bool is_join_requested = false;
     void *arg = nullptr;
 
     static void *exec(void *thr);

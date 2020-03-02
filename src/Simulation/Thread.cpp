@@ -22,11 +22,11 @@ void Thread::start(void *threadArg) {
     if ((ret = pthread_create(&_id, nullptr, &Thread::exec, this)) != 0) {
         throw "Error";
     }
-    this->started = true;
 }
 
 void Thread::join() {
     // Allow the thread to wait for the termination status
+    this->is_join_requested = true;
     pthread_join(_id, nullptr);
 }
 
@@ -34,3 +34,4 @@ void *Thread::exec(void *thr) {
     // Function that is to be executed by the thread
     reinterpret_cast<Thread *> (thr)->run();
 }
+
