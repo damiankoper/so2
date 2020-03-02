@@ -9,6 +9,7 @@ public:
         int xd = 2;
     };
     Vector2i &operator=(const Vector2i &v);
+    bool operator==(const Vector2i &v);
 
     int x = 0;
     int y = 0;
