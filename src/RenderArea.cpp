@@ -1,6 +1,7 @@
 #include "RenderArea.hpp"
 #include "Drawers/StopDrawer.hpp"
 #include "Drawers/RelationDrawer.hpp"
+#include "Drawers/VehicleDrawer.hpp"
 #include <QPainter>
 #include <QPen>
 #include <string>
@@ -24,6 +25,7 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
 {
     StopDrawer stopDrawer;
     RelationDrawer relationDrawer;
+    VehicleDrawer vehicleDrawer;
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -34,6 +36,15 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
         relationDrawer.setRelation(relation);
         relationDrawer.setNth(c++);
         relationDrawer.draw(painter);
+    }
+
+    for (auto relation : world->relations)
+    {
+        for(auto vehicle : relation->vehicles){
+            vehicleDrawer.setRelation(relation);
+            vehicleDrawer.setVehicle(vehicle);
+            vehicleDrawer.draw(painter);
+        }
     }
 
     for (auto stop : world->stops)

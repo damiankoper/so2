@@ -16,5 +16,6 @@ public:
     float length();
 
     Vector2i add(const Vector2i &v);
+    Vector2i sub(const Vector2i &v);
     Vector2i operator-();
 };

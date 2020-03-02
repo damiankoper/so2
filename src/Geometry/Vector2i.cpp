@@ -17,6 +17,11 @@ Vector2i Vector2i::add(const Vector2i &v)
     return Vector2i(v.x + x, v.y + y);
 }
 
+Vector2i Vector2i::sub(const Vector2i &v)
+{
+    return Vector2i(x - v.x, y - v.y);
+}
+
 Vector2i Vector2i::operator-()
 {
     return Vector2i(-x, -y);

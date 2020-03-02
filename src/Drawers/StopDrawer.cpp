@@ -17,7 +17,7 @@ void StopDrawer::draw(QPainter &painter)
         stop->position.x - centerDelta,
         stop->position.y - centerDelta,
         STOP_SIZE,
-        STOP_SIZE + std::max((stop->relationsCount - 1) * 15, 0));
+        STOP_SIZE + std::max(((int)stop->relations.size() - 1) * 15, 0));
     painter.drawRect(rect);
     painter.drawText(stop->position.x - centerDelta - STOP_STROKE / 2,
                      stop->position.y - (centerDelta + STOP_STROKE), QString(text.c_str()));

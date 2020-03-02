@@ -1,8 +1,12 @@
 #pragma once
+#include "../Geometry/Vector2i.hpp"
+#include "Passenger.hpp"
+#include "Stop.hpp"
+#include "Vehicle.hpp"
 #include <vector>
 #include <string>
-#include "Stop.hpp"
-#include "Passenger.hpp"
+class Stop;
+class Vehicle;
 class Relation
 {
 public:
@@ -11,15 +15,14 @@ public:
     std::string name;
     std::string color;
     std::vector<Stop *> stops = std::vector<Stop *>();
-    std::vector<Passenger *> passengers = std::vector<Passenger *>();
+    std::vector<Vehicle *> vehicles = std::vector<Vehicle *>();
 
-    std::vector<Vector2i> getPoints(int nth = 0);
+    std::vector<Vector2i> getPoints();
+    std::vector<Vector2i> getSubPoints(int start, int length);
     Vector2i addPointsForPositions(std::vector<Vector2i> &points,
                                    Vector2i from,
                                    Vector2i to,
                                    Vector2i toOutputDirection);
-
-    //Vector2i getNthShift(int nth);
 
     void addStop(Stop *stop, bool count = true);
 };

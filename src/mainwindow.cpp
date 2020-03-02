@@ -54,8 +54,15 @@ MainWindow::MainWindow(QWidget *parent)
     world->relations.push_back(relation);
     world->relations.push_back(relation2);
     world->relations.push_back(relation3);
-    world->relations.push_back(relation4); // Nth error when all visible
+    world->relations.push_back(relation4);
     world->relations.push_back(relation5);
+
+    /**
+     * Dynamic from here 
+     */
+    Vehicle * v1 = new Vehicle();
+    v1->position = 100;
+    relation->vehicles.push_back(v1);
 
     renderArea->setMPKWorld(world);
     ui->setupUi(this);

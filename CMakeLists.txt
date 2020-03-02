@@ -23,6 +23,7 @@ set(SOURCE_FILES
     src/RenderArea.cpp
     src/Drawers/StopDrawer.cpp
     src/Drawers/RelationDrawer.cpp
+    src/Drawers/VehicleDrawer.cpp
 )
 
 add_project_meta(META_FILES_TO_INCLUDE)

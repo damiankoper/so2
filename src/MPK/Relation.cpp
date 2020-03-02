@@ -1,19 +1,15 @@
 #include "Relation.hpp"
-
+#include <algorithm>
 void Relation::addStop(Stop *stop, bool count)
 {
     stops.push_back(stop);
     if (count)
     {
-        stop->relationsCount++;
+        stop->relations.push_back(this);
     }
 }
 
-/* Vector2i Relation::getNthShift(int nth)
-{
-} */
-
-std::vector<Vector2i> Relation::getPoints(int nth)
+std::vector<Vector2i> Relation::getPoints()
 {
     std::vector<Vector2i> points = std::vector<Vector2i>();
 
@@ -23,8 +19,11 @@ std::vector<Vector2i> Relation::getPoints(int nth)
     {
         Stop *current = stops[i];
         Stop *next = stops[i + 1];
-        int currentStopNth = std::min(nth, current->relationsCount - 1);
-        int nextStopNth = std::min(nth, next->relationsCount - 1);
+        auto currentMatch = std::find(current->relations.begin(), current->relations.end(), this);
+        auto nextMatch = std::find(next->relations.begin(), next->relations.end(), this);
+
+        int currentStopNth = currentMatch - current->relations.begin();
+        int nextStopNth = nextMatch - next->relations.begin();
         prevOutputDir = addPointsForPositions(
             points,
             current->position.add(Vector2i(0, currentStopNth * 15)),
@@ -32,7 +31,9 @@ std::vector<Vector2i> Relation::getPoints(int nth)
             prevOutputDir);
     }
 
-    int stopNth = std::min(nth, stops[stops.size() - 1]->relationsCount);
+    Stop *lastStop = stops[stops.size() - 1];
+    auto stopMatch = std::find(lastStop->relations.begin(), lastStop->relations.end(), this);
+    int stopNth = stopMatch - lastStop->relations.begin();
     points.push_back(stops[stops.size() - 1]->position.add(Vector2i(0, stopNth * 15)));
     return points;
 }
@@ -121,4 +122,34 @@ Vector2i Relation::addPointsForPositions(
     }
 
     return prevOutputDirection;
+}
+
+std::vector<Vector2i> Relation::getSubPoints(int start, int length)
+{
+    std::vector<Vector2i> points = getPoints();
+    std::vector<Vector2i> subPoints = std::vector<Vector2i>();
+
+    float travelledLength = 0;
+    size_t startIndex = 0;
+
+    while (travelledLength < start)
+    {
+        Vector2i prev = points[startIndex];
+        Vector2i next = points[startIndex + 1];
+        float distance = prev.sub(next).length();
+        travelledLength += distance;
+        startIndex++;
+    }
+
+    size_t endIndex = startIndex+1;
+
+    while (travelledLength < start+length)
+    {
+        Vector2i prev = points[startIndex];
+        Vector2i next = points[startIndex + 1];
+        float distance = prev.sub(next).length();
+        travelledLength += distance;
+    }
+
+
 }

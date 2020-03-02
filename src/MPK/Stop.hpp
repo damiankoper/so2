@@ -1,9 +1,11 @@
 #pragma once
 #include "Passenger.hpp"
+#include "Relation.hpp"
 #include "../Geometry/Vector2i.hpp"
 #include <string>
 #include <vector>
 class Passenger;
+class Relation;
 
 class Stop
 {
@@ -17,5 +19,5 @@ public:
     std::string name;
     Vector2i position;
     std::vector<Passenger *> passengers = std::vector<Passenger *>();
-    int relationsCount = 0;
+    std::vector<Relation *> relations = std::vector<Relation *>();
 };
