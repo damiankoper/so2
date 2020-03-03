@@ -28,7 +28,7 @@ set(SOURCE_FILES
 
 add_project_meta(META_FILES_TO_INCLUDE)
 
-set(RESOURCE_FILES example.qrc src/Simulation/VehicleSimulator.cpp src/Simulation/VehicleSimulator.h src/Simulation/Thread.cpp src/Simulation/Thread.h)
+set(RESOURCE_FILES example.qrc src/Simulation/VehicleSimulator.cpp src/Simulation/VehicleSimulator.h src/Simulation/Thread.cpp src/Simulation/Thread.h src/Simulation/MpkSimulator.cpp src/Simulation/MpkSimulator.h)
 
 find_package(Qt5Widgets REQUIRED)
 

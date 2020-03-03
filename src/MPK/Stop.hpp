@@ -3,6 +3,7 @@
 #include "Relation.hpp"
 #include "../Geometry/Vector2i.hpp"
 #include <string>
+#include <utility>
 #include <vector>
 class Passenger;
 class Relation;
@@ -11,10 +12,10 @@ class Stop
 {
 
 public:
-    Stop(Vector2i position, std::string name) : position(position), name(name) {}
+    Stop(const Vector2i& position, std::string name) : position(position), name(std::move(name)) {}
     Stop(const Stop &stop) : Stop(stop.position, stop.name) {}
     Stop &operator=(const Stop &stop);
-    ~Stop(){};
+    ~Stop()= default;
 
     std::string name;
     Vector2i position;
