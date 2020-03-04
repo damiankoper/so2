@@ -8,6 +8,8 @@ class MpkSimulator {
 public:
   MpkSimulator();
 
+  void startSimulation();
+
   void createStopSimulatorsFromRelation(std::shared_ptr<Relation> relation);
 
   std::vector<std::shared_ptr<StopSimulator>> stopSimulators;
