@@ -20,7 +20,7 @@ RenderArea::RenderArea(QWidget *parent) : QWidget(parent) {
   connect(timer, &QTimer::timeout, this, [self]() {
     for (auto &&relation : ((RenderArea *)self)->world->relations) {
       for (auto &&vehicle : relation->vehicles) {
-        vehicle->position += vehicle->speed;
+        vehicle->distance += vehicle->speed;
       }
     }
     self->repaint();

@@ -189,14 +189,23 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length)
 }
 
 float Relation::getStopDistance(Stop *targetStop) {
-  float totalDistance = 0;
+  // Calculated distance is stored in cache for quicker later access.
+  if (!this->stopDistanceCache.contains(targetStop)) {
+    float totalDistance = 0;
 
-  auto points = getPoints();
-  for (int i = 0; i < points.size() - 1; ++i) {
-    if (points[i] == targetStop->position)
-      break;
-    totalDistance += points[i + 1].length() - points[i].length();
+    auto points = getPoints();
+    for (int i = 0; i < points.size() - 1; ++i) {
+      if (points[i] == targetStop->position)
+        break;
+      totalDistance += points[i + 1].length() - points[i].length();
+    }
+
+    this->stopDistanceCache[targetStop] = totalDistance;
   }
-
-  return totalDistance;
+  return this->stopDistanceCache[targetStop];
 }
+
+float Relation::getTotalDistance() {
+  return this->getStopDistance(this->stops.back());
+}
+

@@ -3,6 +3,7 @@
 #include "RenderArea.hpp"
 #include <QMainWindow>
 #include <QScopedPointer>
+#include <src/Simulation/MpkSimulator.hpp>
 namespace Ui {
 class MainWindow;
 }
@@ -14,6 +15,8 @@ public:
   explicit MainWindow(QWidget *parent = nullptr);
 
   ~MainWindow() override;
+  std::shared_ptr<MPKWorld> mpkWorld = nullptr;
+  std::shared_ptr<MpkSimulator> mpkSimulator = nullptr;
 
 private:
   QScopedPointer<Ui::MainWindow> ui;
