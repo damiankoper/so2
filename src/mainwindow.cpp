@@ -73,11 +73,11 @@ MainWindow::MainWindow(QWidget *parent)
   /**
    * Dynamic from here
    */
-  Vehicle *v1 = new Vehicle();
-  Vehicle *v2 = new Vehicle();
-  Vehicle *v3 = new Vehicle();
-  Vehicle *v4 = new Vehicle();
-  Vehicle *v5 = new Vehicle();
+  auto *v1 = new Vehicle();
+  auto *v2 = new Vehicle();
+  auto *v3 = new Vehicle();
+  auto *v4 = new Vehicle();
+  auto *v5 = new Vehicle();
   relation0L->vehicles.push_back(v1);
   relation0P->vehicles.push_back(v2);
   relation16->vehicles.push_back(v3);
