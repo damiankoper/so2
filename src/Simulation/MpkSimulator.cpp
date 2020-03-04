@@ -2,8 +2,6 @@
 // Created by maja on 02.03.2020.
 //
 
-#include "MpkSimulator.h"
+#include "MpkSimulator.hpp"
 
-MpkSimulator::MpkSimulator() {
-
-}
+MpkSimulator::MpkSimulator() {}

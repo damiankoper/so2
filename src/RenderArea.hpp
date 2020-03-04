@@ -3,15 +3,15 @@
 #include <QWidget>
 
 class RenderArea : public QWidget {
-Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit RenderArea(QWidget *parent);
+  explicit RenderArea(QWidget *parent);
 
-    void setMPKWorld(MPKWorld *mpkWorld);
+  void setMPKWorld(MPKWorld *mpkWorld);
 
 protected:
-    MPKWorld *world = nullptr;
+  MPKWorld *world = nullptr;
 
-    void paintEvent(QPaintEvent * /* event */) override;
+  void paintEvent(QPaintEvent * /* event */) override;
 };

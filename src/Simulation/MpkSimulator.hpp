@@ -2,9 +2,5 @@
 
 class MpkSimulator {
 public:
-    MpkSimulator();
-
-
+  MpkSimulator();
 };
-
-

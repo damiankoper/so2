@@ -7,6 +7,7 @@ project(so2 C CXX)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
+set(CMAKE_CXX_STANDARD 20)
 # Add folder where are supportive functions
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -33,7 +34,7 @@ set(SOURCE_FILES
 
 add_project_meta(META_FILES_TO_INCLUDE)
 
-set(RESOURCE_FILES example.qrc src/Simulation/VehicleSimulator.cpp src/Simulation/VehicleSimulator.h src/Simulation/Thread.cpp src/Simulation/Thread.h src/Simulation/MpkSimulator.cpp src/Simulation/MpkSimulator.h)
+set(RESOURCE_FILES example.qrc src/Simulation/VehicleSimulator.cpp src/Simulation/VehicleSimulator.hpp src/Simulation/Thread.cpp src/Simulation/Thread.hpp src/Simulation/MpkSimulator.cpp src/Simulation/MpkSimulator.hpp src/Simulation/StopSimulator.cpp src/Simulation/StopSimulator.hpp src/Utils/RandUtils.cpp src/Utils/RandUtils.hpp)
 
 # source_group("UI Files" FILES ${UI_FILES})
 

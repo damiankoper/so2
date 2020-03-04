@@ -2,8 +2,8 @@
 // Created by maja on 02.03.2020.
 //
 
-#ifndef SO2_THREAD_H
-#define SO2_THREAD_H
+#ifndef SO2_THREAD_HPP
+#define SO2_THREAD_HPP
 
 #include "pthread.h"
 
@@ -36,7 +36,9 @@ public:
     void join();
 
     virtual void run() = 0;
+
+    void sleep_millis(long millis);
 };
 
 
-#endif //SO2_THREAD_H
+#endif //SO2_THREAD_HPP

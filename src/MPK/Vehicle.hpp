@@ -6,17 +6,19 @@ class Passenger;
 
 class Vehicle {
 public:
-    explicit Vehicle(int speed = 1, int capacity = 10);
+  explicit Vehicle(float speed = 1, int capacity = 10);
 
-    std::vector<Passenger *> passengers = std::vector<Passenger *>();
+  std::vector<Passenger *> passengers = std::vector<Passenger *>();
 
-    void resetDistance();
+  void resetDistance();
 
-    void addPassenger(Passenger *);
+  bool addPassenger(Passenger *newPassenger);
+  bool removePassenger(Passenger *passengerToRemove);
+  void incrementDistance();
 
-    void incrementDistance();
+  int remainingCapacity();
 
-    float speed;
-    int capacity;
-    float position = 0;
+  float speed;
+  int capacity;
+  float position = 0;
 };
