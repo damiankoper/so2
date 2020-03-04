@@ -4,4 +4,11 @@
 
 #include "MpkSimulator.hpp"
 
-MpkSimulator::MpkSimulator() {}
+MpkSimulator::MpkSimulator() {
+
+}
+
+void MpkSimulator::createStopSimulatorsFromRelation(
+    std::shared_ptr<Relation> relation) {
+
+}

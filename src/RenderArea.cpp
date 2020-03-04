@@ -19,7 +19,7 @@ RenderArea::RenderArea(QWidget *parent) : QWidget(parent) {
   QWidget *self = this;
   connect(timer, &QTimer::timeout, this, [self]() {
     auto v1 = ((RenderArea *)self)->world->relations[0]->vehicles[0];
-    v1->position = v1->speed;
+    v1->distance = v1->speed;
     self->repaint();
   });
   timer->start(1000 / 60);

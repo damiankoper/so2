@@ -20,5 +20,5 @@ public:
 
   float speed;
   int capacity;
-  float position = 0;
+  float distance = 0;
 };

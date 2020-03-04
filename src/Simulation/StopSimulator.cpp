@@ -1,6 +1,8 @@
 #include "StopSimulator.hpp"
 
-StopSimulator::StopSimulator(std::vector<std::shared_ptr<Relation>> relations) {
+StopSimulator::StopSimulator(std::shared_ptr<Stop> stop,
+                             std::vector<std::shared_ptr<Relation>> relations) {
+  this->stop = stop;
   this->relations = std::move(relations);
 }
 

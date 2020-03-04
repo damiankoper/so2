@@ -1,6 +1,6 @@
 #include "Vehicle.hpp"
 
-void Vehicle::resetDistance() { this->position = 0; }
+void Vehicle::resetDistance() { this->distance = 0; }
 
 Vehicle::Vehicle(float speed, int capacity)
     : speed(speed), capacity(capacity) {}
@@ -13,7 +13,7 @@ bool Vehicle::addPassenger(Passenger *newPassenger) {
   return true;
 }
 
-void Vehicle::incrementDistance() { this->position += this->speed; }
+void Vehicle::incrementDistance() { this->distance += this->speed; }
 
 int Vehicle::remainingCapacity() {
   return this->capacity - int(this->passengers.size());
@@ -24,16 +24,14 @@ bool Vehicle::removePassenger(Passenger *passengerToRemove) {
   // The Passenger object is NOT destroyed.
   // Returns true if passenger is found and removed.
   // Returns false otherwise.
-  for (auto passenger : this->passengers) {
-    auto begin = passengers.begin();
-    auto end = passengers.end();
-    for (auto it = begin; it != end;) {
-      if ((*it) == passengerToRemove) {
-        this->passengers.erase(it);
-        return true;
-      }
-      ++it;
+  auto begin = passengers.begin();
+  auto end = passengers.end();
+  for (auto it = begin; it != end;) {
+    if ((*it) == passengerToRemove) {
+      this->passengers.erase(it);
+      return true;
     }
-    return false;
+    ++it;
   }
+  return false;
 }

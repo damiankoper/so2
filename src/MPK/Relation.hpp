@@ -4,6 +4,7 @@
 #include "Passenger.hpp"
 #include "Stop.hpp"
 #include "Vehicle.hpp"
+#include <map>
 #include <string>
 #include <utility>
 #include <vector>
@@ -20,6 +21,7 @@ public:
   std::string color;
   std::vector<Stop *> stops = std::vector<Stop *>();
   std::vector<Vehicle *> vehicles = std::vector<Vehicle *>();
+  std::map<Stop *, float> stopDistanceCache;
 
   std::vector<Vector2i> getPoints();
 
@@ -32,4 +34,6 @@ public:
   void addStop(Stop *stop, bool count = true);
 
   float getStopDistance(Stop *targetStop);
+
+  float getTotalDistance();
 };

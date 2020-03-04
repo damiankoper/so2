@@ -14,7 +14,7 @@ void VehicleDrawer::draw(QPainter &painter) {
   painter.setPen(pen2);
 
   for (auto &&point : relation->getSubPoints(
-           vehicle->position, std::max(40, (int)vehicle->passengers.size() *
+           vehicle->distance, std::max(40, (int)vehicle->passengers.size() *
                                                VEHICLE_CAPACITY_SIZE))) {
     points.push_back(QPoint(point.x, point.y));
     painter.drawEllipse(QPoint(point.x, point.y), 20, 20);

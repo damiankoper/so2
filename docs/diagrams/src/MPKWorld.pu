@@ -7,7 +7,7 @@ class MPKWorld{
 
 class Stop {
     name: string
-    position: Vector2i
+    distance: Vector2i
     passengers: Passenger[]
 }
 
@@ -23,7 +23,7 @@ class Relation {
 
 class Vehicle{
     speed: float
-    position: float
+    distance: float
     relation: Relation
     passengers: Passenger[]
 }
