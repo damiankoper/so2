@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
       renderArea(new RenderArea(this)) {
   this->mpkWorld = std::make_shared<MPKWorld>();
-//  this->mpkSimulator = std::make_shared<MpkSimulator>();
+  this->mpkSimulator = std::make_shared<MpkSimulator>();
 
   Stop *stopKosciuszki = new Stop(Vector2i(300, 300), "Kościuszki");
   Stop *stopKomunyParyskiej = new Stop(Vector2i(500, 400), "Komuny Paryskiej");
@@ -63,8 +63,11 @@ MainWindow::MainWindow(QWidget *parent)
   std::vector<Relation *> allRelations{relation16, relation0L, relation0P,
                                        relation5, relation17};
 
+
+
   for (auto relation : allRelations) {
     this->mpkWorld->relations.push_back(relation);
+//    this->mpkSimulator->createStopSimulatorsFromRelation();
   }
 
   /**
@@ -76,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   renderArea->setMPKWorld(this->mpkWorld.get());
   ui->setupUi(this);
+  this->mpkSimulator->startSimulation();
 }
 
-MainWindow::~MainWindow() {}
+MainWindow::~MainWindow() = default;
