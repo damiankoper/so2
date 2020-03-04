@@ -8,7 +8,7 @@
 #include <src/MPK/Relation.hpp>
 
 #define SLEEP_INTERVAL_MILLIS_60FPS 1000 / 60
-#define SLEEP_PASSENGER_EXCHANGE_MILLIS 100
+#define SLEEP_PER_PASSENGER_EXCHANGE_MILLIS 100
 #define SLEEP_STOP_MILLIS 2000
 
 class VehicleSimulator : public Thread {

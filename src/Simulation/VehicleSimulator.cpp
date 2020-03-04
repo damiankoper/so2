@@ -53,7 +53,8 @@ void VehicleSimulator::run() {
       exchangedPassengerCount += int(boardingPassengerCount);
 
       // Simulate passenger exchange waiting time
-      this->sleep_millis(SLEEP_STOP_MILLIS + SLEEP_PASSENGER_EXCHANGE_MILLIS *
+      this->sleep_millis(SLEEP_STOP_MILLIS +
+                         SLEEP_PER_PASSENGER_EXCHANGE_MILLIS *
                                                  exchangedPassengerCount);
 
       stop->mutex.unlock();
