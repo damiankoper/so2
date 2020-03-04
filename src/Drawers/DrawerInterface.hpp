@@ -1,10 +1,9 @@
 #pragma once
 #include <QPainter>
 
-class DrawerInterface
-{
+class DrawerInterface {
 public:
-    virtual ~DrawerInterface(){};
+  virtual ~DrawerInterface(){};
 
-    virtual void draw(QPainter &painter) = 0;
+  virtual void draw(QPainter &painter) = 0;
 };

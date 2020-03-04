@@ -187,3 +187,16 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length)
 
     return subPoints;
 }
+
+float Relation::getStopDistance(Stop *targetStop) {
+  float totalDistance = 0;
+
+  auto points = getPoints();
+  for (int i = 0; i < points.size() - 1; ++i) {
+    if (points[i] == targetStop->position)
+      break;
+    totalDistance += points[i + 1].length() - points[i].length();
+  }
+
+  return totalDistance;
+}

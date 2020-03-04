@@ -1,70 +1,58 @@
 #include "RenderArea.hpp"
-#include "Drawers/StopDrawer.hpp"
 #include "Drawers/RelationDrawer.hpp"
+#include "Drawers/StopDrawer.hpp"
 #include "Drawers/VehicleDrawer.hpp"
 #include <QPainter>
 #include <QPen>
 #include <QTimer>
 #include <string>
-RenderArea::RenderArea(QWidget *parent) : QWidget(parent)
-{
-    this->setGeometry(0, 0, 1280, 720);
-    QPalette pal = palette();
+RenderArea::RenderArea(QWidget *parent) : QWidget(parent) {
+  this->setGeometry(0, 0, 1280, 720);
+  QPalette pal = palette();
 
-    // set background
-    pal.setColor(QPalette::Background, Qt::white);
-    this->setAutoFillBackground(true);
-    this->setPalette(pal);
+  // set background
+  pal.setColor(QPalette::Background, QColor("#DDDDDD"));
+  this->setAutoFillBackground(true);
+  this->setPalette(pal);
 
-    QTimer *timer = new QTimer(this);
-    QWidget *self = this;
-    connect(timer, &QTimer::timeout, this, [self]() {
-        for (auto &&relation : ((RenderArea *)self)->world->relations)
-        {
-            for (auto &&vehicle : relation->vehicles)
-            {
-                vehicle->distance += vehicle->speed;
-            }
-        }
-        self->repaint();
-    });
-    timer->start(1000 / 60);
+  QTimer *timer = new QTimer(this);
+  QWidget *self = this;
+  connect(timer, &QTimer::timeout, this, [self]() {
+    for (auto &&relation : ((RenderArea *)self)->world->relations) {
+      for (auto &&vehicle : relation->vehicles) {
+        vehicle->position += vehicle->speed;
+      }
+    }
+    self->repaint();
+  });
+  timer->start(1000 / 60);
 }
 
-void RenderArea::setMPKWorld(MPKWorld *world)
-{
-    this->world = world;
-}
+void RenderArea::setMPKWorld(MPKWorld *mpkWorld) { this->world = mpkWorld; }
 
-void RenderArea::paintEvent(QPaintEvent * /* event */)
-{
-    StopDrawer stopDrawer;
-    RelationDrawer relationDrawer;
-    VehicleDrawer vehicleDrawer;
+void RenderArea::paintEvent(QPaintEvent * /* event */) {
+  StopDrawer stopDrawer;
+  RelationDrawer relationDrawer;
+  VehicleDrawer vehicleDrawer;
 
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
+  QPainter painter(this);
+  painter.setRenderHint(QPainter::Antialiasing);
 
-    int c = 0;
-    for (auto relation : world->relations)
-    {
-        relationDrawer.setRelation(relation);
-        relationDrawer.draw(painter);
+  for (auto relation : world->relations) {
+    relationDrawer.setRelation(relation);
+    relationDrawer.draw(painter);
+  }
+
+  for (auto relation : world->relations) {
+    for (auto vehicle : relation->vehicles) {
+      vehicleDrawer.setRelation(relation);
+      vehicleDrawer.setVehicle(vehicle);
+      vehicleDrawer.draw(painter);
     }
+  }
 
-    for (auto relation : world->relations)
-    {
-        for (auto vehicle : relation->vehicles)
-        {
-            vehicleDrawer.setRelation(relation);
-            vehicleDrawer.setVehicle(vehicle);
-            vehicleDrawer.draw(painter);
-        }
-    }
-
-    for (auto stop : world->stops)
-    {
-        stopDrawer.setStop(stop);
-        stopDrawer.draw(painter);
-    }
+  for (auto stop : world->stops) {
+    stopDrawer.setStop(stop);
+    stopDrawer.draw(painter);
+  }
 }

@@ -53,7 +53,8 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "cinttypes": "cpp"
   },
   "plantuml.exportOutDir": "docs/diagrams/out",
   "cmake.configureOnOpen": true

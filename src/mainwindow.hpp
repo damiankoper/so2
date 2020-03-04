@@ -1,22 +1,21 @@
 #pragma once
 
+#include "RenderArea.hpp"
 #include <QMainWindow>
 #include <QScopedPointer>
-#include "RenderArea.hpp"
-namespace Ui
-{
+namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
-    virtual ~MainWindow();
+  explicit MainWindow(QWidget *parent = nullptr);
+
+  ~MainWindow() override;
 
 private:
-    QScopedPointer<Ui::MainWindow> ui;
-    QScopedPointer<RenderArea> renderArea;
+  QScopedPointer<Ui::MainWindow> ui;
+  QScopedPointer<RenderArea> renderArea;
 };
