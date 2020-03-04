@@ -160,8 +160,8 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length) {
         {
             /*int distanceLeft = end - travelledDistance;
             startPoint = Vector2i(
-                (startPoint.x * distanceLeft + next.x * (travelledDistance + distance - end)) / (travelledDistance + distance - end + distanceLeft),
-                (startPoint.y * distanceLeft + next.y * (travelledDistance + distance - end)) / (travelledDistance + distance - end + distanceLeft));
+                (startPoint.x * distanceLeft + next.x * (travelledDistance + position - end)) / (travelledDistance + position - end + distanceLeft),
+                (startPoint.y * distanceLeft + next.y * (travelledDistance + position - end)) / (travelledDistance + position - end + distanceLeft));
              */
             subPoints.push_back(startPoint);
             break;
