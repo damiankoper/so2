@@ -16,7 +16,7 @@ RenderArea::RenderArea(QWidget *parent) : QWidget(parent)
     this->setAutoFillBackground(true);
     this->setPalette(pal);
 
-    QTimer *timer = new QTimer(this);
+    auto *timer = new QTimer(this);
     QWidget *self = this;
     connect(timer, &QTimer::timeout, this, [self]() {
         auto v1 = ((RenderArea *)self)->world->relations[0]->vehicles[0];
@@ -26,9 +26,8 @@ RenderArea::RenderArea(QWidget *parent) : QWidget(parent)
     timer->start(1000 / 60);
 }
 
-void RenderArea::setMPKWorld(MPKWorld *world)
-{
-    this->world = world;
+void RenderArea::setMPKWorld(MPKWorld *mpkWorld) {
+    this->world = mpkWorld;
 }
 
 void RenderArea::paintEvent(QPaintEvent * /* event */)
@@ -40,7 +39,6 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    int c = 0;
     for (auto relation : world->relations)
     {
         relationDrawer.setRelation(relation);

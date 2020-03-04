@@ -16,7 +16,7 @@ public:
 
     void incrementDistance();
 
-    int speed;
+    float speed;
     int capacity;
     float position = 0;
 };

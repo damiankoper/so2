@@ -1,9 +1,9 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
+
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), renderArea(new RenderArea(this))
-{
-    MPKWorld *world = new MPKWorld();
+        : QMainWindow(parent), ui(new Ui::MainWindow), renderArea(new RenderArea(this)) {
+    auto *world = new MPKWorld();
     Stop *stop = new Stop(Vector2i(300, 300), "Kościuszki");
     Stop *stop_another = new Stop(Vector2i(500, 400), "Komuny Paryskiej");
     Stop *stop_another_other = new Stop(Vector2i(720, 300), "Plac Wróblewskiego");
@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     world->stops.push_back(stop_another_other_hehe_hihi_huhu);
     world->stops.push_back(stop_another_other_hehe_hihi_huhu_haha);
 
-    Relation *relation = new Relation("16");
+    auto *relation = new Relation("16");
     relation->addStop(stop);
     relation->addStop(stop_another);
     relation->addStop(stop_another_other);
@@ -27,24 +27,24 @@ MainWindow::MainWindow(QWidget *parent)
     relation->addStop(stop_another_other_hehe_hihi);
     relation->addStop(stop, false); //cycle
 
-    Relation *relation2 = new Relation("OL", "blue");
+    auto *relation2 = new Relation("OL", "blue");
     relation2->addStop(stop);
     relation2->addStop(stop_another);
     relation2->addStop(stop_another_other);
     relation2->addStop(stop, false);
 
-    Relation *relation3 = new Relation("OP", "green");
+    auto *relation3 = new Relation("OP", "green");
     relation3->addStop(stop_another);
     relation3->addStop(stop_another_other);
     relation3->addStop(stop_another, false);
 
-    Relation *relation4 = new Relation("5", "magenta");
+    auto *relation4 = new Relation("5", "magenta");
     relation4->addStop(stop_another);
     relation4->addStop(stop_another_other);
     relation4->addStop(stop_another_other_hehe_hihi_huhu);
     relation4->addStop(stop_another, false);
 
-    Relation *relation5 = new Relation("17", "cyan");
+    auto *relation5 = new Relation("17", "cyan");
     relation5->addStop(stop_another);
     relation5->addStop(stop_another_other);
     relation5->addStop(stop_another_other_hehe_hihi_huhu);
@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
     /**
      * Dynamic from here 
      */
-    Vehicle *v1 = new Vehicle();
+    auto *v1 = new Vehicle();
     v1->position = 100;
     relation->vehicles.push_back(v1);
 
@@ -68,6 +68,4 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
-{
-}
+MainWindow::~MainWindow() = default;

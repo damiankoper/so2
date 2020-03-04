@@ -10,7 +10,7 @@
 class Thread {
 
 private:
-    pthread_t _id;
+    pthread_t _id{};
 
     // Prevent copying or assignment
     Thread(const Thread &arg);

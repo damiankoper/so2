@@ -2,15 +2,16 @@
 #include "MPK/MPKWorld.hpp"
 #include <QWidget>
 
-class RenderArea : public QWidget
-{
-    Q_OBJECT
+class RenderArea : public QWidget {
+Q_OBJECT
 
 public:
-    RenderArea(QWidget *parent);
-    void setMPKWorld(MPKWorld *world);
+    explicit RenderArea(QWidget *parent);
+
+    void setMPKWorld(MPKWorld *mpkWorld);
 
 protected:
     MPKWorld *world = nullptr;
-    void paintEvent(QPaintEvent * /* event */);
+
+    void paintEvent(QPaintEvent * /* event */) override;
 };
