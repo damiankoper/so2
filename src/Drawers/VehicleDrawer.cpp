@@ -30,8 +30,8 @@ void VehicleDrawer::draw(QPainter &painter) {
   QPoint pointLineStart = points[points.size() - 1];
   painter.setPen(Qt::black);
   painter.setBrush(Qt::white);
-  painter.drawRect(point.x(), point.y() - height,
-                   width + padding, height + padding);
+  painter.drawRect(point.x(), point.y() - height, width + padding,
+                   height + padding);
   painter.setBrush(Qt::transparent);
   painter.drawText(point.x() + padding / 2, point.y() - height + padding / 2,
                    width + padding, height + padding, Qt::AlignLeft,

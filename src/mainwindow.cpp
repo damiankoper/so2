@@ -63,11 +63,9 @@ MainWindow::MainWindow(QWidget *parent)
   std::vector<Relation *> allRelations{relation16, relation0L, relation0P,
                                        relation5, relation17};
 
-
-
   for (auto relation : allRelations) {
     this->mpkWorld->relations.push_back(relation);
-//    this->mpkSimulator->createStopSimulatorsFromRelation();
+    //    this->mpkSimulator->createStopSimulatorsFromRelation();
   }
 
   /**
