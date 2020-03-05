@@ -4,8 +4,12 @@
 
 #include "MpkSimulator.hpp"
 
-MpkSimulator::MpkSimulator() {}
+MpkSimulator::MpkSimulator() = default;
 
-void MpkSimulator::createStopSimulatorsFromRelation(
-    std::shared_ptr<Relation> relation) {}
-void MpkSimulator::startSimulation() {}
+void MpkSimulator::startSimulation() {
+  // Start stop simulators and vehicle simulators here
+}
+
+void MpkSimulator::initFromRelations(const std::vector<Relation *> &relations) {
+  // Create stop simulators and vehicle simulators here
+}

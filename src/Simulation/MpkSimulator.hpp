@@ -10,7 +10,8 @@ public:
 
   void startSimulation();
 
-  void createStopSimulatorsFromRelation(std::shared_ptr<Relation> relation);
+  void
+  initFromRelations(const std::vector<Relation *> &relations); // TODO: impl
 
   std::vector<std::shared_ptr<StopSimulator>> stopSimulators;
   std::vector<std::shared_ptr<VehicleSimulator>> vehicleSimulators;

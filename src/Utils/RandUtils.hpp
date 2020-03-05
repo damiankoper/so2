@@ -1,5 +1,4 @@
-#ifndef SRC_RANDUTILS_H
-#define SRC_RANDUTILS_H
+#pragma once
 
 #include <chrono>
 #include <random>
@@ -14,5 +13,3 @@ public:
 
   static float getFloat(float min, float max);
 };
-
-#endif // SRC_RANDUTILS_H

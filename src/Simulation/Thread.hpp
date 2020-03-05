@@ -10,35 +10,34 @@
 class Thread {
 
 private:
-    pthread_t _id{};
+  pthread_t _id{};
 
-    // Prevent copying or assignment
-    Thread(const Thread &arg);
+  // Prevent copying or assignment
+  Thread(const Thread &arg);
 
-    Thread &operator=(const Thread &rhs);
+  Thread &operator=(const Thread &rhs);
 
 protected:
-    bool started = false;
-    bool is_join_requested = false;
-    void *arg = nullptr;
+  bool started = false;
+  bool is_join_requested = false;
+  void *arg = nullptr;
 
-    static void *exec(void *thr);
+  static void *exec(void *thr);
 
 public:
-    Thread();
+  Thread();
 
-    virtual ~Thread();
+  virtual ~Thread();
 
-    unsigned int tid() const;
+  [[nodiscard]] unsigned int tid() const;
 
-    void start(void *threadArg = nullptr);
+  void start(void *threadArg = nullptr);
 
-    void join();
+  void join();
 
-    virtual void run() = 0;
+  virtual void run() = 0;
 
-    void sleep_millis(long millis);
+  void sleep_millis(long millis);
 };
 
-
-#endif //SO2_THREAD_HPP
+#endif // SO2_THREAD_HPP
