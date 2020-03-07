@@ -195,7 +195,7 @@ float Relation::getStopDistance(Stop *targetStop) {
 float Relation::getTotalDistance() {
   float totalDistance = 0;
   auto points = getPoints();
-  for (int i = 0; i < points.size()-1; ++i) {
+  for (int i = 0; i < points.size() - 1; ++i) {
     totalDistance += (points[i + 1].sub(points[i])).length();
   }
   return totalDistance;

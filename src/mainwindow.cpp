@@ -66,7 +66,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->mpkWorld->relations.push_back(relation);
   }
 
-
   /**
    * Dynamic from here
    */
@@ -76,11 +75,10 @@ MainWindow::MainWindow(QWidget *parent)
   auto *v4 = new Vehicle();
   auto *v5 = new Vehicle();
   relation0L->vehicles.push_back(v1); // TODO: create more vehicles
-
-//  relation0P->vehicles.push_back(v2);
-//  relation16->vehicles.push_back(v3);
-//  relation17->vehicles.push_back(v4);
-//  relation5->vehicles.push_back(v5);
+  relation0P->vehicles.push_back(v2);
+  relation16->vehicles.push_back(v3);
+  relation17->vehicles.push_back(v4);
+  relation5->vehicles.push_back(v5);
 
   this->mpkSimulator = std::make_shared<MpkSimulator>(allRelations);
   this->mpkSimulator->startSimulation();
@@ -88,4 +86,4 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
 }
 
-MainWindow::~MainWindow() = default;
+MainWindow::~MainWindow() {}

@@ -6,7 +6,7 @@
 
 class MpkSimulator {
 public:
-  explicit MpkSimulator(const std::vector<Relation *>& relations);
+  explicit MpkSimulator(const std::vector<Relation *> &relations);
 
   void startSimulation();
   void stopSimulation();

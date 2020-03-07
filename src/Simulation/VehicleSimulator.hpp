@@ -7,7 +7,8 @@
 #include <memory>
 #include <src/MPK/Relation.hpp>
 
-#define SLEEP_PER_PASSENGER_EXCHANGE_MILLIS 200
+#define SLEEP_PER_PASSENGER_EXCHANGE 250
+#define SLEEP_ON_STOP 1000
 
 class VehicleSimulator : public Thread {
 public:
@@ -15,8 +16,8 @@ public:
 
   void run() override;
 
-  void getPassengersFromStop(Stop* stop);
-  void dropPassengersAtStop(Stop* stop);
+  void getPassengersFromStop(Stop *stop);
+  void dropPassengersAtStop(Stop *stop);
   Vehicle *vehicle;
   Relation *relation;
 };
