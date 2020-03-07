@@ -7,7 +7,7 @@
 
 #include "pthread.h"
 
-#define SLEEP_INTERVAL_FRAME 1000 / 360
+#define SLEEP_INTERVAL_FRAME 1000 / 180
 
 class Thread {
 

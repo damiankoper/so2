@@ -8,27 +8,25 @@ VehicleSimulator::VehicleSimulator(Vehicle *vehicle, Relation *relation) {
 }
 
 void VehicleSimulator::run() {
-  float lastStopDistance = 0;
+  float lastStopDistance = -1;
   float totalRelationDistance = this->relation->getTotalDistance();
 
   while (!isJoinRequested) {
     this->vehicle->incrementDistance();
-    std::cout << "Vehicle distance: " << vehicle->distance << std::endl;
 
-        // Handle relation looping
-        if (this->vehicle->distance > totalRelationDistance) {
-          this->vehicle->resetDistance();
-          lastStopDistance = 0;
-        }
+    // Handle relation looping
+    if (this->vehicle->distance > totalRelationDistance) {
+      this->vehicle->distance = 0;
+      lastStopDistance = -1;
+    }
 
-    for (auto currentStop : relation->stops) {
-      float currentStopDistance = relation->getStopDistance(currentStop);
-      std::cout << "Stop '" << currentStop->name
-                << "' distance: " << currentStopDistance << std::endl;
-
+    for (int i = 0; i < relation->stops.size() - 1; ++i) {
+      auto currentStop = relation->stops[i];
+      std::cout << "Vehicle distance: " << vehicle->distance << std::endl;
       std::cout << "Last stop distance: " << lastStopDistance << std::endl;
 
-      if (currentStopDistance < lastStopDistance ||
+      float currentStopDistance = relation->getStopDistance(currentStop);
+      if (currentStopDistance <= lastStopDistance ||
           this->vehicle->distance < currentStopDistance) {
         continue;
       }
@@ -42,9 +40,6 @@ void VehicleSimulator::run() {
 
       dropPassengersAtStop(currentStop);
       getPassengersFromStop(currentStop);
-
-      // Wait additional time on stop.
-      this->sleep_millis(SLEEP_STOP_MILLIS);
 
       currentStop->mutex.unlock();
       break;

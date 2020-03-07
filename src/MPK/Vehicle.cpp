@@ -1,7 +1,5 @@
 #include "Vehicle.hpp"
 
-void Vehicle::resetDistance() { this->distance = 0; }
-
 Vehicle::Vehicle(float speed, int capacity)
     : speed(speed), capacity(capacity) {}
 

@@ -10,8 +10,6 @@ public:
 
   std::vector<Passenger *> passengers = std::vector<Passenger *>();
 
-  void resetDistance();
-
   bool addPassenger(Passenger *newPassenger);
   bool removePassenger(Passenger *passengerToRemove);
   void incrementDistance();
