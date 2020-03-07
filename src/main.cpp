@@ -3,6 +3,7 @@
 #include "mainwindow.hpp"
 #include <QApplication>
 int main(int argc, char *argv[]) {
+  srand(time(nullptr));
   QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QApplication app(argc, argv);
   MainWindow mainWindow;

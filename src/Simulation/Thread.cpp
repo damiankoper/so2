@@ -34,8 +34,10 @@ void *Thread::exec(void *thr) {
 }
 
 void Thread::sleep_millis(long millis) {
+  long sec = (millis - millis % 1000) / 1000;
+  long nanos = (millis % 1000) * 1000000;
   struct timespec tp {
-    0, millis * 1000000
+    sec, nanos
   };
   nanosleep(&tp, nullptr);
 }

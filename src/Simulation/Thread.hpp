@@ -7,6 +7,8 @@
 
 #include "pthread.h"
 
+#define SLEEP_INTERVAL_MILLIS_60FPS 1000 / 60
+
 class Thread {
 
 private:

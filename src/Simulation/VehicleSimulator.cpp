@@ -3,10 +3,9 @@
 
 #include <utility>
 
-VehicleSimulator::VehicleSimulator(std::shared_ptr<Vehicle> vehicle,
-                                   std::shared_ptr<Relation> relation) {
-  this->vehicle = std::move(vehicle);
-  this->relation = std::move(relation);
+VehicleSimulator::VehicleSimulator(Vehicle *vehicle, Relation *relation) {
+  this->vehicle = vehicle;
+  this->relation = relation;
 }
 
 void VehicleSimulator::run() {
@@ -31,17 +30,17 @@ void VehicleSimulator::run() {
 
       // Drop off passengers whose target is the current stop.
       // Dropped off Passenger objects are destroyed.
-      for (auto passenger : this->vehicle->passengers) {
-        if (passenger->target == stop) {
-          this->vehicle->removePassenger(passenger);
-          delete passenger;
-          exchangedPassengerCount++;
-        }
-      }
+//      for (auto passenger : this->vehicle->passengers) {
+//        if (passenger->target == stop) {
+//          this->vehicle->removePassenger(passenger);
+//          delete passenger;
+//          exchangedPassengerCount++;
+//        }
+//      }
 
       // Get passengers who can get to their target using this relation.
       auto availablePassengersAtStop =
-          stop->getPassengersByRelation(relation.get());
+          stop->getPassengersByRelation(relation);
       unsigned int boardingPassengerCount =
           availablePassengersAtStop.size() %
           (this->vehicle->remainingCapacity() + 1);

@@ -6,12 +6,10 @@
 
 class MpkSimulator {
 public:
-  MpkSimulator();
+  explicit MpkSimulator(const std::vector<Relation *>& relations);
 
   void startSimulation();
-
-  void
-  initFromRelations(const std::vector<Relation *> &relations); // TODO: impl
+  void stopSimulation();
 
   std::vector<std::shared_ptr<StopSimulator>> stopSimulators;
   std::vector<std::shared_ptr<VehicleSimulator>> vehicleSimulators;

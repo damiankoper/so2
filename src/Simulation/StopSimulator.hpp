@@ -15,15 +15,14 @@
 
 class StopSimulator : public Thread {
 public:
-  explicit StopSimulator(std::shared_ptr<Stop> stop,
-                         std::vector<std::shared_ptr<Relation>> relations);
+  explicit StopSimulator(Stop *stop, std::vector<Relation *> relations);
 
   void run() override;
-  void spawnPassengers(int passengerCount);
+  void spawnPassenger();
   std::vector<Stop *> getAvailableTargetStops();
 
-  std::shared_ptr<Stop> stop;
-  std::vector<std::shared_ptr<Relation>> relations;
+  Stop *stop;
+  std::vector<Relation *> relations;
 };
 
 #endif // SO2_STOPSIMULATOR_HPP
