@@ -32,6 +32,7 @@ void VehicleSimulator::run() {
 
       // Vehicle reached current stop.
       lastStopDistance = this->vehicle->distance;
+      this->sleep_millis(SLEEP_ON_STOP);
 
       currentStop->mutex.lock();
 
@@ -39,8 +40,8 @@ void VehicleSimulator::run() {
       getPassengersFromStop(currentStop);
 
       currentStop->mutex.unlock();
-
       this->sleep_millis(SLEEP_ON_STOP);
+
       break;
     }
     this->sleep_millis(SLEEP_INTERVAL_FRAME);
