@@ -6,7 +6,7 @@ class Passenger;
 
 class Vehicle {
 public:
-  explicit Vehicle(float speed = 1, int capacity = 10);
+  explicit Vehicle(float speed = 1, int capacity = 20);
 
   std::vector<Passenger *> passengers = std::vector<Passenger *>();
 

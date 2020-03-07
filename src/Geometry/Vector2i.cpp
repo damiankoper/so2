@@ -18,3 +18,4 @@ Vector2i Vector2i::operator-() { return Vector2i(-x, -y); }
 bool Vector2i::operator==(const Vector2i &v) {
   return this->x == v.x && this->y == v.y;
 }
+

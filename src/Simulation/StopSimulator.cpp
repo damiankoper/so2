@@ -20,19 +20,19 @@ void StopSimulator::run() {
     }
 
     this->stop->mutex.unlock();
-    auto sleepTime = 1000 * RandUtils::getInt(2, 5);
+    auto sleepTime = 1000 * RandUtils::getInt(5, 20);
     this->sleep_millis(sleepTime);
   }
 }
 
 std::vector<Stop *> StopSimulator::getAvailableTargetStops() {
   std::vector<Stop *> availableTargetStops;
-
   // Get all possible targets using this stop's relations.
   for (const auto &currentRelation : this->relations) {
     for (auto currentStop : currentRelation->stops) {
-      if (this->stop == currentStop) {
-        // Ignore this stop.
+      if (this->stop == currentStop ||
+          std::find(availableTargetStops.begin(), availableTargetStops.end(),
+                    currentStop) != availableTargetStops.end()) {
         continue;
       }
       availableTargetStops.push_back(currentStop);
@@ -42,8 +42,6 @@ std::vector<Stop *> StopSimulator::getAvailableTargetStops() {
   return availableTargetStops;
 }
 void StopSimulator::spawnPassenger() {
-  std::shared_ptr<Passenger> newPassenger;
-
   auto availableTargetStops = this->getAvailableTargetStops();
   if (availableTargetStops.empty()) {
     return;
@@ -51,6 +49,6 @@ void StopSimulator::spawnPassenger() {
   int targetIndex = RandUtils::getInt(0, availableTargetStops.size());
   Stop *targetStop = availableTargetStops[targetIndex];
 
-  newPassenger = std::make_shared<Passenger>(this->stop, targetStop);
+  auto newPassenger = new Passenger(this->stop, targetStop);
   this->stop->addPassenger(newPassenger);
 }

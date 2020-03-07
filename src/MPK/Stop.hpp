@@ -26,7 +26,7 @@ public:
 
   ~Stop() = default;
 
-  void addPassenger(const std::shared_ptr<Passenger> &passenger);
+  void addPassenger(Passenger *passenger);
 
   bool removePassenger(Passenger *passengerToRemove);
 

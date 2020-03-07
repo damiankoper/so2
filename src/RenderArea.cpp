@@ -20,7 +20,8 @@ RenderArea::RenderArea(QWidget *parent) : QWidget(parent) {
   connect(timer, &QTimer::timeout, this, [self]() {
     for (auto &&relation : ((RenderArea *)self)->world->relations) {
       for (auto &&vehicle : relation->vehicles) {
-        vehicle->distance += vehicle->speed;
+//        vehicle->distance += vehicle->speed; // CZEMU MNIE TROLUJESZ DANUN
+        // SZUKAM OD 15 MIN CZEMU WĄTEK MI ZWIĘKSZA DISTANCE KIEDY ŚPI XD
       }
     }
     self->repaint();

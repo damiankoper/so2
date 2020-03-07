@@ -1,4 +1,5 @@
 #include "Thread.hpp"
+#include <thread>
 
 Thread::Thread() = default;
 
@@ -34,10 +35,5 @@ void *Thread::exec(void *thr) {
 }
 
 void Thread::sleep_millis(long millis) {
-  long sec = (millis - millis % 1000) / 1000;
-  long nanos = (millis % 1000) * 1000000;
-  struct timespec tp {
-    sec, nanos
-  };
-  nanosleep(&tp, nullptr);
+  std::this_thread::sleep_for(std::chrono::milliseconds(millis));
 }

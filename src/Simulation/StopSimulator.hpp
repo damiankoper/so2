@@ -20,7 +20,6 @@ public:
   void run() override;
   void spawnPassenger();
   std::vector<Stop *> getAvailableTargetStops();
-
   Stop *stop;
   std::vector<Relation *> relations;
 };

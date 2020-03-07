@@ -64,7 +64,6 @@ MainWindow::MainWindow(QWidget *parent)
 
   for (auto relation : allRelations) {
     this->mpkWorld->relations.push_back(relation);
-
   }
 
 
@@ -77,6 +76,12 @@ MainWindow::MainWindow(QWidget *parent)
   auto *v4 = new Vehicle();
   auto *v5 = new Vehicle();
   relation0L->vehicles.push_back(v1); // TODO: create more vehicles
+
+  for(auto stop : relation0L->stops){
+    auto distance = relation0L->getStopDistance(stop);
+    int a =0;
+
+  }
 //  relation0P->vehicles.push_back(v2);
 //  relation16->vehicles.push_back(v3);
 //  relation17->vehicles.push_back(v4);

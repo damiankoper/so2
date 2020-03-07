@@ -5,9 +5,8 @@ Stop &Stop::operator=(const Stop &stop) {
   return *this;
 }
 
-void Stop::addPassenger(const std::shared_ptr<Passenger> &passenger) {
-  this->passengers.push_back(
-      passenger.get()); // TODO: refactor using shared pointers
+void Stop::addPassenger(Passenger *passenger) {
+  this->passengers.push_back(passenger);
 }
 
 std::vector<Passenger *> Stop::getPassengersByRelation(Relation *relation) {
