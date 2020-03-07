@@ -12,10 +12,11 @@ void VehicleSimulator::run() {
   float totalRelationDistance = this->relation->getTotalDistance();
 
   while (!isJoinRequested) {
-    this->vehicle->incrementDistance();
-
-    // Handle relation looping
-    if (this->vehicle->distance > totalRelationDistance) {
+    // Handle cycle looping
+    if (vehicle->distance + vehicle->speed < totalRelationDistance) {
+      vehicle->distance += vehicle->speed;
+    }
+    else{
       this->vehicle->distance = 0;
       lastStopDistance = -1;
     }
