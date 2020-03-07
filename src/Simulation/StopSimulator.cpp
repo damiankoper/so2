@@ -8,18 +8,19 @@ StopSimulator::StopSimulator(Stop *stop, std::vector<Relation *> relations) {
 }
 
 void StopSimulator::run() {
-  while (!is_join_requested) {
+  while (!isJoinRequested) {
     this->stop->mutex.lock();
 
-    // Spawn random amount of passengers on this stop.
+    // Spawn passengers on this stop.
     int maxSpawnCount = SPAWN_COUNT_PER_RELATION * this->relations.size();
     int passengerCountToSpawn = RandUtils::getInt(0, maxSpawnCount);
     for (int i = 0; i < passengerCountToSpawn; ++i) {
       this->spawnPassenger();
-      this->sleep_millis(SLEEP_INTERVAL_MILLIS_60FPS);
+      this->sleep_millis(SLEEP_INTERVAL_FRAME);
     }
 
     this->stop->mutex.unlock();
+
     auto sleepTime = 1000 * RandUtils::getInt(5, 20);
     this->sleep_millis(sleepTime);
   }
@@ -41,6 +42,7 @@ std::vector<Stop *> StopSimulator::getAvailableTargetStops() {
 
   return availableTargetStops;
 }
+
 void StopSimulator::spawnPassenger() {
   auto availableTargetStops = this->getAvailableTargetStops();
   if (availableTargetStops.empty()) {

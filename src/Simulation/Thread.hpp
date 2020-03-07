@@ -7,7 +7,7 @@
 
 #include "pthread.h"
 
-#define SLEEP_INTERVAL_MILLIS_60FPS 1000 / 60
+#define SLEEP_INTERVAL_FRAME 1000 / 360
 
 class Thread {
 
@@ -21,7 +21,7 @@ private:
 
 protected:
   bool started = false;
-  bool is_join_requested = false;
+  bool isJoinRequested = false;
   void *arg = nullptr;
 
   static void *exec(void *thr);

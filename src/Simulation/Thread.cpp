@@ -25,7 +25,7 @@ void Thread::start(void *threadArg) {
 
 void Thread::join() {
   // Allow the thread to wait for the termination status
-  this->is_join_requested = true;
+  this->isJoinRequested = true;
   pthread_join(_id, nullptr);
 }
 

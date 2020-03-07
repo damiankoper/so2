@@ -11,7 +11,7 @@
 #include <src/Utils/RandUtils.hpp>
 #include <utility>
 
-#define SPAWN_COUNT_PER_RELATION 5
+#define SPAWN_COUNT_PER_RELATION 1
 
 class StopSimulator : public Thread {
 public:
