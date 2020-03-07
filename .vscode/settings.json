@@ -54,7 +54,11 @@
     "streambuf": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "condition_variable": "cpp",
+    "mutex": "cpp",
+    "shared_mutex": "cpp",
+    "thread": "cpp"
   },
   "plantuml.exportOutDir": "docs/diagrams/out",
   "cmake.configureOnOpen": true
