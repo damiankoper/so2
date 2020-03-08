@@ -142,12 +142,20 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length) {
   } while (true);
 
   int end = start + length;
+  float lastDistance = 0;
 
   do {
+    if (startIndex >= points.size() - 1) {
+      auto rPoints = getSubPoints(0, end - travelledDistance);
+      for (auto &&point : rPoints) {
+        subPoints.push_back(Vector2i(point.x, point.y));
+      }
+      break;
+    }
     Vector2i next = points[startIndex + 1];
     Vector2i path = next.sub(startPoint);
     float distance = path.length();
-    if (travelledDistance + distance <= end) {
+    if (travelledDistance + distance <= end && startIndex < points.size() - 1) {
       travelledDistance += distance;
       startPoint = next;
       startIndex++;
@@ -161,6 +169,7 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length) {
       subPoints.push_back(startPoint);
       break;
     }
+    lastDistance = distance;
   } while (true);
 
   return subPoints;

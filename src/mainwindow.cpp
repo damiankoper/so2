@@ -18,11 +18,12 @@ MainWindow::MainWindow(QWidget *parent)
   Stop *stopNowowiejska = new Stop(Vector2i(800, 600), "Nowowiejska");
   Stop *stopPlacDominikanski =
       new Stop(Vector2i(200, 550), "Plac Dominikański");
+  Stop *stopHubska = new Stop(Vector2i(1000, 400), "Hubska");
 
   std::vector<Stop *> allStops{stopKosciuszki,        stopKomunyParyskiej,
                                stopPlacWroblewskiego, stopMostGrunwaldzki,
                                stopPlacGrunwaldzki,   stopNowowiejska,
-                               stopPlacDominikanski};
+                               stopPlacDominikanski,  stopHubska};
   for (auto stop : allStops) {
     this->mpkWorld->stops.push_back(stop);
   }
@@ -49,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
   auto *relation5 = new Relation("5", "magenta");
   relation5->addStop(stopKomunyParyskiej);
   relation5->addStop(stopPlacWroblewskiego);
+  relation5->addStop(stopHubska);
   relation5->addStop(stopNowowiejska);
   relation5->addStop(stopKomunyParyskiej, false);
 
@@ -69,16 +71,21 @@ MainWindow::MainWindow(QWidget *parent)
   /**
    * Dynamic from here
    */
-  auto *v1 = new Vehicle();
-  auto *v2 = new Vehicle();
-  auto *v3 = new Vehicle();
-  auto *v4 = new Vehicle();
-  auto *v5 = new Vehicle();
-  relation0L->vehicles.push_back(v1); // TODO: create more vehicles
-  relation0P->vehicles.push_back(v2);
-  relation16->vehicles.push_back(v3);
-  relation17->vehicles.push_back(v4);
-  relation5->vehicles.push_back(v5);
+  auto addViehcles = [](Relation *relation, int count) {
+    int distance = 0;
+    for (size_t i = 0; i < count; i++) {
+      auto *v = new Vehicle();
+      v->distance = distance;
+      relation->vehicles.push_back(v);
+      distance += 300;
+    }
+  };
+
+  addViehcles(relation16, 6);
+  addViehcles(relation17, 6);
+  addViehcles(relation0P, 2);
+  addViehcles(relation0L, 6);
+  addViehcles(relation5, 3);
 
   this->mpkSimulator = std::make_shared<MpkSimulator>(allRelations);
   this->mpkSimulator->startSimulation();
