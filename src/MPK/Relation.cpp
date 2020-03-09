@@ -147,7 +147,7 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length) {
     if (startIndex >= points.size() - 1) {
       auto rPoints = getSubPoints(0, end - travelledDistance);
       for (auto &&point : rPoints) {
-        subPoints.push_back(Vector2i(point.x, point.y));
+        subPoints.emplace_back(point.x, point.y);
       }
       break;
     }

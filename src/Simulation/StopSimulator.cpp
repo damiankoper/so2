@@ -14,7 +14,7 @@ void StopSimulator::run() {
 
     // Spawn passengers on this currentStop.
     int maxSpawnCount =
-        StopSimulator::spawn_count_per_relation * int(this->relations.size());
+        StopSimulator::spawn_count_per_relation * RandUtils::getInt(1, 10);
     int passengerCountToSpawn = RandUtils::getInt(0, maxSpawnCount + 1);
     for (int i = 0; i < passengerCountToSpawn; ++i) {
       this->spawnPassenger();
@@ -23,7 +23,7 @@ void StopSimulator::run() {
 
     this->stop->mutex.unlock();
 
-    auto sleepTime = Thread::sleep_frame * RandUtils::getInt(1, 60);
+    auto sleepTime = Thread::sleep_frame * 60 * RandUtils::getInt(3, 20);
     this->sleep_millis(sleepTime);
   }
 }
