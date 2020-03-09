@@ -71,8 +71,8 @@ MainWindow::MainWindow(QWidget *parent)
   /**
    * Dynamic from here
    */
-  auto addViehcles = [](Relation *relation, int count) {
-    int distance = 0;
+  auto addVehicles = [](Relation *relation, int count) {
+    float distance = 0;
     for (size_t i = 0; i < count; i++) {
       auto *v = new Vehicle();
       v->distance = distance;
@@ -81,11 +81,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
   };
 
-  addViehcles(relation16, 6);
-  addViehcles(relation17, 6);
-  addViehcles(relation0P, 2);
-  addViehcles(relation0L, 6);
-  addViehcles(relation5, 3);
+  addVehicles(relation16, 5);
+  addVehicles(relation17, 3);
+  addVehicles(relation0P, 3);
+  addVehicles(relation0L, 3);
+  addVehicles(relation5, 3);
 
   this->mpkSimulator = std::make_shared<MpkSimulator>(allRelations);
   this->mpkSimulator->startSimulation();
@@ -93,4 +93,4 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
 }
 
-MainWindow::~MainWindow() {}
+MainWindow::~MainWindow() = default;

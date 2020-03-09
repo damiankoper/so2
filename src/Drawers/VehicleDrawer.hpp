@@ -5,8 +5,8 @@
 #include <QPainter>
 class VehicleDrawer : public DrawerInterface {
 public:
-  void setVehicle(Vehicle *vehicle);
-  void setRelation(Relation *relation);
+  void setVehicle(Vehicle *inputVehicle);
+  void setRelation(Relation *inputRelation);
   void draw(QPainter &painter) override;
 
 private:

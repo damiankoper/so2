@@ -25,14 +25,11 @@ bool Vehicle::removePassenger(Passenger *passengerToRemove) {
   // The Passenger object is NOT destroyed.
   // Returns true if passenger is found and removed.
   // Returns false otherwise.
-  auto begin = passengers.begin();
-  auto end = passengers.end();
-  for (auto it = begin; it != end;) {
-    if ((*it) == passengerToRemove) {
-      this->passengers.erase(it);
+  for (int i = 0; i < passengers.size(); ++i) {
+    if (passengers[i] == passengerToRemove) {
+      this->passengers.erase(passengers.begin() + i);
       return true;
     }
-    ++it;
   }
   return false;
 }

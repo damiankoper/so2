@@ -10,15 +10,15 @@ void Stop::addPassenger(Passenger *passenger) {
 }
 
 std::vector<Passenger *> Stop::getPassengersByRelation(Relation *relation) {
-  // Returns passengers from this stop, that can get to their target using this
-  // relation.
+  // Returns passengers from this currentStop, that can get to their target
+  // using this relation.
   std::vector<Passenger *> result;
-
-  for (auto passenger : this->passengers) {
-    for (auto stop : relation->stops) {
-      if (passenger->target == stop) {
+  for (auto currentPassenger : this->passengers) {
+    for (int i = 0; i < relation->stops.size() - 1; ++i) {
+      Stop *currentStop = relation->stops[i];
+      if (currentPassenger->target == currentStop) {
         // Passenger can get to target by using this relation
-        result.push_back(passenger);
+        result.push_back(currentPassenger);
       }
     }
   }
@@ -27,7 +27,7 @@ std::vector<Passenger *> Stop::getPassengersByRelation(Relation *relation) {
 }
 
 bool Stop::removePassenger(Passenger *passengerToRemove) {
-  // Attempts to remove passenger from stop.
+  // Attempts to remove passenger from currentStop.
   // The Passenger object is NOT destroyed.
   // Returns true if passenger is found and removed.
   // Returns false otherwise.

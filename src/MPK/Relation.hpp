@@ -22,7 +22,7 @@ public:
   std::vector<Stop *> stops = std::vector<Stop *>();
   std::vector<Vehicle *> vehicles = std::vector<Vehicle *>();
   std::map<Stop *, float> stopDistanceCache;
-
+  float totalDistance = -1;
   std::vector<Vector2i> getPoints();
 
   std::vector<Vector2i> getSubPoints(int start, int length);

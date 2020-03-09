@@ -7,8 +7,6 @@
 
 #include "pthread.h"
 
-#define FRAMES_PER_SECOND 60
-#define SLEEP_INTERVAL_FRAME 1000 / FRAMES_PER_SECOND
 
 class Thread {
 
@@ -41,6 +39,9 @@ public:
   virtual void run() = 0;
 
   void sleep_millis(long millis);
+
+  static const unsigned int frames_per_second = 120;
+  static const unsigned int sleep_frame = 1000 / Thread::frames_per_second;
 };
 
 #endif // SO2_THREAD_HPP

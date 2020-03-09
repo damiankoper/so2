@@ -5,16 +5,25 @@
 #include "MpkSimulator.hpp"
 MpkSimulator::MpkSimulator(const std::vector<Relation *> &relations) {
   std::vector<Stop *> handledStops;
+  std::map<Stop *, std::vector<Relation *>> relationsPerStop;
+
+  // Map relations to each stop
+  for (auto currentRelation : relations) {
+    for (auto currentStop : currentRelation->stops) {
+      relationsPerStop[currentStop].push_back(currentRelation);
+    }
+  }
 
   for (auto relation : relations) {
-    // Create stop simulators for each stop in relation.
-    // Skip creation if stop already has simulator.
-    for (auto stop : relation->stops) {
-      if (std::find(handledStops.begin(), handledStops.end(), stop) !=
+    // Create currentStop simulators for each currentStop in relation.
+    // Skip creation if currentStop already has simulator.
+    for (auto currentStop : relation->stops) {
+      if (std::find(handledStops.begin(), handledStops.end(), currentStop) !=
           handledStops.end()) {
         continue;
       }
-      auto newStopSim = std::make_shared<StopSimulator>(stop, relations);
+      auto newStopSim = std::make_shared<StopSimulator>(
+          currentStop, relationsPerStop[currentStop]);
       this->stopSimulators.push_back(newStopSim);
     }
 

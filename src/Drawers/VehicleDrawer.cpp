@@ -1,19 +1,21 @@
 #include "VehicleDrawer.hpp"
 #include <QString>
-void VehicleDrawer::setVehicle(Vehicle *vehicle) { this->vehicle = vehicle; }
+void VehicleDrawer::setVehicle(Vehicle *inputVehicle) {
+  this->vehicle = inputVehicle;
+}
 
-void VehicleDrawer::setRelation(Relation *relation) {
-  this->relation = relation;
+void VehicleDrawer::setRelation(Relation *inputRelation) {
+  this->relation = inputRelation;
 }
 
 void VehicleDrawer::draw(QPainter &painter) {
   // W sumie useless jest Vector2i jak jest QPoint
   std::vector<QPoint> points = std::vector<QPoint>();
-  auto length =
-      std::max(40, (int)vehicle->passengers.size() * VEHICLE_CAPACITY_SIZE);
+  auto length = 40;
+  //      std::max(40, (int)vehicle->passengers.size() * VEHICLE_CAPACITY_SIZE);
   for (auto &&point :
-       relation->getSubPoints(vehicle->distance - length / 2, length)) {
-    points.push_back(QPoint(point.x, point.y));
+       relation->getSubPoints(vehicle->distance - length / 2.0, length)) {
+    points.emplace_back(point.x, point.y);
   }
 
   QPen pen(QColor(relation->color.c_str()).lighter(125), VEHICLE_STROKE,

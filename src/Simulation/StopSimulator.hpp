@@ -11,8 +11,6 @@
 #include <src/Utils/RandUtils.hpp>
 #include <utility>
 
-#define SPAWN_COUNT_PER_RELATION 1
-
 class StopSimulator : public Thread {
 public:
   explicit StopSimulator(Stop *stop, std::vector<Relation *> relations);
@@ -22,6 +20,9 @@ public:
   std::vector<Stop *> getAvailableTargetStops();
   Stop *stop;
   std::vector<Relation *> relations;
+  std::vector<Stop *> availableTargetStops;
+
+  static const int spawn_count_per_relation = 1;
 };
 
 #endif // SO2_STOPSIMULATOR_HPP

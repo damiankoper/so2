@@ -7,17 +7,21 @@
 #include <memory>
 #include <src/MPK/Relation.hpp>
 
-#define SLEEP_PER_PASSENGER_EXCHANGE 250
-#define SLEEP_ON_STOP 1000
-
 class VehicleSimulator : public Thread {
 public:
   explicit VehicleSimulator(Vehicle *vehicle, Relation *relation);
 
   void run() override;
 
-  void getPassengersFromStop(Stop *stop);
-  void dropPassengersAtStop(Stop *stop);
+  int getPassengersFromStop(Stop *stop);
+  int dropPassengersAtStop(Stop *currentStop);
+  void updateDistance();
+
+  float lastStopDistance;
   Vehicle *vehicle;
   Relation *relation;
+
+  static const unsigned long sleep_on_stop = Thread::sleep_frame * 60;
+  static const unsigned long sleep_per_passenger_exchange =
+      Thread::sleep_frame * 15;
 };

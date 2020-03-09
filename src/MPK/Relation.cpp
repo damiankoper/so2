@@ -142,7 +142,6 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length) {
   } while (true);
 
   int end = start + length;
-  float lastDistance = 0;
 
   do {
     if (startIndex >= points.size() - 1) {
@@ -161,15 +160,13 @@ std::vector<Vector2i> Relation::getSubPoints(int start, int length) {
       startIndex++;
       subPoints.push_back(startPoint);
     } else {
-      int distanceLeft = end - travelledDistance;
+      float distanceLeft = end - travelledDistance;
       float a = distanceLeft / distance;
-      travelledDistance += distanceLeft;
       startPoint =
           Vector2i(startPoint.x + path.x * a, startPoint.y + path.y * a);
       subPoints.push_back(startPoint);
       break;
     }
-    lastDistance = distance;
   } while (true);
 
   return subPoints;
@@ -179,7 +176,7 @@ float Relation::getStopDistance(Stop *targetStop) {
   // Calculated distance is stored in cache for quicker later access.
 
   if (!this->stopDistanceCache.contains(targetStop)) {
-    float totalDistance = 0;
+    float stopDistance = 0;
 
     auto points = getPoints();
 
@@ -192,20 +189,21 @@ float Relation::getStopDistance(Stop *targetStop) {
     for (int i = 0; i < points.size() - 1; ++i) {
       if (points[i] == realStopPosition)
         break;
-      totalDistance += (points[i + 1].sub(points[i])).length();
+      stopDistance += (points[i + 1].sub(points[i])).length();
     }
-
-    return totalDistance;
-    this->stopDistanceCache[targetStop] = totalDistance;
+    this->stopDistanceCache[targetStop] = stopDistance;
   }
   return this->stopDistanceCache[targetStop];
 }
 
 float Relation::getTotalDistance() {
-  float totalDistance = 0;
-  auto points = getPoints();
-  for (int i = 0; i < points.size() - 1; ++i) {
-    totalDistance += (points[i + 1].sub(points[i])).length();
+  if (totalDistance == -1) {
+    float result = 0;
+    auto points = getPoints();
+    for (int i = 0; i < points.size() - 1; ++i) {
+      result += (points[i + 1].sub(points[i])).length();
+    }
+    this->totalDistance = result;
   }
-  return totalDistance;
+  return this->totalDistance;
 }
