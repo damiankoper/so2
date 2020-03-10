@@ -22,11 +22,11 @@ int Vehicle::remainingCapacity() {
 
 bool Vehicle::removePassenger(Passenger *passengerToRemove) {
   // Attempts to remove passenger from vehicle.
-  // The Passenger object is NOT destroyed.
   // Returns true if passenger is found and removed.
   // Returns false otherwise.
   for (int i = 0; i < passengers.size(); ++i) {
     if (passengers[i] == passengerToRemove) {
+      delete passengerToRemove; // TODO
       this->passengers.erase(passengers.begin() + i);
       return true;
     }

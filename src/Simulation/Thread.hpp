@@ -7,7 +7,6 @@
 
 #include "pthread.h"
 
-
 class Thread {
 
 private:
@@ -19,8 +18,8 @@ private:
   Thread &operator=(const Thread &rhs);
 
 protected:
-  bool started = false;
-  bool isJoinRequested = false;
+  bool started;
+  bool isJoinRequested;
   void *arg = nullptr;
 
   static void *exec(void *thr);

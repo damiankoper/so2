@@ -49,10 +49,12 @@ std::vector<Stop *> StopSimulator::getAvailableTargetStops() {
 void StopSimulator::spawnPassenger() {
   auto targetStops = this->availableTargetStops;
   if (targetStops.empty()) {
-    return;
+    throw std::exception();
   }
   int targetIndex = RandUtils::getInt(0, targetStops.size());
   Stop *targetStop = targetStops[targetIndex];
+  // TODO: revert to random index
+  //  Stop *targetStop = targetStops[0];
 
   auto newPassenger = new Passenger(this->stop, targetStop);
   this->stop->addPassenger(newPassenger);

@@ -73,7 +73,6 @@ int VehicleSimulator::dropPassengersAtStop(Stop *currentStop) {
       if (passenger->target == currentStop) {
         this->vehicle->removePassenger(passenger);
         foundPassengerToRemove = true;
-        //        delete passenger; // TODO: wysrywa sie, nie wiem czemu.
         ++actualDropCount;
         this->sleep_millis(VehicleSimulator::sleep_per_passenger_exchange);
       }

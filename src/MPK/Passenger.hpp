@@ -13,7 +13,7 @@ public:
   Passenger(const Passenger &passenger)
       : Passenger(passenger.source, passenger.target) {}
   Passenger &operator=(const Passenger &passenger);
-  ~Passenger() = default;
+  ~Passenger();
 
   const Stop *source;
   const Stop *target;

@@ -1,7 +1,7 @@
 #include "Thread.hpp"
 #include <thread>
 
-Thread::Thread() = default;
+Thread::Thread() : isJoinRequested(false), started(false) {}
 
 Thread::~Thread() = default;
 
