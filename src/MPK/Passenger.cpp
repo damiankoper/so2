@@ -3,4 +3,5 @@
 Passenger &Passenger::operator=(const Passenger &passenger) {
   return *this = Passenger(passenger);
 }
-Passenger::~Passenger() = default;
+
+Passenger::~Passenger() {}

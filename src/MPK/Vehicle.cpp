@@ -26,7 +26,7 @@ bool Vehicle::removePassenger(Passenger *passengerToRemove) {
   // Returns false otherwise.
   for (int i = 0; i < passengers.size(); ++i) {
     if (passengers[i] == passengerToRemove) {
-      delete passengerToRemove; // TODO
+      delete passengerToRemove;
       this->passengers.erase(passengers.begin() + i);
       return true;
     }
