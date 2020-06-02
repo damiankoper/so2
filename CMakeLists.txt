@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 3.1)
 
-project(so2 C CXX)
+project(MPK_Sim C CXX)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
@@ -43,7 +43,7 @@ add_executable(${PROJECT_NAME} ${OS_BUNDLE} # Expands to WIN32 or MACOS_BUNDLE d
 ${SOURCE_FILES} ${META_FILES_TO_INCLUDE} ${RESOURCE_FILES}
 )
 
-target_link_libraries (so2 ${CMAKE_THREAD_LIBS_INIT} Threads::Threads)
+target_link_libraries (MPK_Sim ${CMAKE_THREAD_LIBS_INIT} Threads::Threads)
 
 
 qt5_use_modules(${PROJECT_NAME} Widgets)
