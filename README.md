@@ -8,5 +8,5 @@ Wymagania:
 
 Kompilacja i uruchomienie:
 ```sh
-$(cd build && cmake .. && make && ./MPK_Sim)
+make && ./build/MPK_Sim
 ```
